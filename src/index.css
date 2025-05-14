@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+@theme {
+	--color-dark-gray: #252525;
+	--color-light-gray: #303030;
+	--color-dark-white: #d7d7d7;
+	--color-priority-red: #b33836;
+	--color-priority-orange: #b0682a;
+	--color-priority-green: #328c5f;
+}
+
+@layer utilities {
+	.custom-datepicker-icon::-webkit-calendar-picker-indicator {
+		@apply absolute top-0 left-0 w-full h-full p-0 m-0 cursor-pointer;
+	}
+}
