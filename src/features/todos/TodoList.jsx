@@ -35,7 +35,14 @@ function TodoList() {
 			case 'priority':
 				return priorityOrder[b.priority] - priorityOrder[a.priority]
 			case 'dueDate':
-				return a.dueDate - b.dueDate
+				const getDateTime = todo => {
+					if (!todo.dueDate) return Infinity
+					const dateTimeStr = todo.dueTime
+						? `${todo.dueDate}T${todo.dueTime}`
+						: `${todo.dueDate}T00:00`
+					return new Date(dateTimeStr).getTime()
+				}
+				return getDateTime(a) - getDateTime(b)
 			case 'alphabetically':
 				return a.name.localeCompare(b.name)
 			default:
