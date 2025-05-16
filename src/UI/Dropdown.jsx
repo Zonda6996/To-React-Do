@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import DropdownLink from './DropdownLink'
 
 function Dropdown({ title, options, onSelect }) {
@@ -18,4 +19,4 @@ function Dropdown({ title, options, onSelect }) {
 	)
 }
 
-export default Dropdown
+export default memo(Dropdown)

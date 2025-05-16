@@ -1,10 +1,10 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import CalendarIcon from '../images/icons/calendar.svg?react'
 import TimeIcon from '../images/icons/time.svg?react'
 import { setDueDate, setDueTime } from '../features/todos/todosSlice'
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 
-function DatePicker({ todo }) {
+const DatePicker = memo(function DatePicker({ todo }) {
 	const dispatch = useDispatch()
 	const [timeError, setTimeError] = useState('')
 
@@ -59,6 +59,6 @@ function DatePicker({ todo }) {
 			)}
 		</>
 	)
-}
+})
 
 export default DatePicker

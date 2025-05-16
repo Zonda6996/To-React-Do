@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { deleteTodo, completeTodo, setPriority } from './todosSlice'
 import clsx from 'clsx'
@@ -9,7 +9,7 @@ import TrashIcon from '../../images/icons/trash.svg?react'
 import DueInfo from './DueInfo'
 import TodoDetails from './TodoDetails'
 
-function TodoListItem({ todo }) {
+const TodoListItem = memo(function TodoListItem({ todo }) {
 	const dispatch = useDispatch()
 	const [hovered, setHovered] = useState({ type: null, id: null })
 
@@ -88,7 +88,7 @@ function TodoListItem({ todo }) {
 								className={
 									todo.completed
 										? 'line-through flex-1 truncate'
-										: 'flex-1 truncate'
+										: 'flex-1 truncate max-w-[635px]'
 								}
 								onClick={() => handleEditClick(todo)}
 							>
@@ -141,6 +141,6 @@ function TodoListItem({ todo }) {
 			<TodoDetails todo={todo} />
 		</li>
 	)
-}
+})
 
 export default TodoListItem

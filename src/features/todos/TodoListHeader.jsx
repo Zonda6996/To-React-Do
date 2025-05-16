@@ -1,12 +1,13 @@
 import { useSelector } from 'react-redux'
 import TodoFiltration from './TodoFiltration'
+import { memo } from 'react'
 
 function TodoListHeader() {
-	const todos = useSelector(state => state.todosList.todos)
+	const todosLength = useSelector(state => state.todosList.todos.length)
 
 	return (
 		<>
-			{todos.length !== 0 ? (
+			{todosLength !== 0 ? (
 				<div className='relative flex justify-between mt-10'>
 					<h4 className='text-xl font-semibold'>Task List:</h4>
 					<TodoFiltration />
@@ -16,4 +17,4 @@ function TodoListHeader() {
 	)
 }
 
-export default TodoListHeader
+export default memo(TodoListHeader)

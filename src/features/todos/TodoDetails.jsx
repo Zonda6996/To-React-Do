@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { memo, useState } from 'react'
 import clsx from 'clsx'
 import { formattedDateTime } from '../../helpers/formattedDateTime'
 import { setDueDate, setDueTime } from './todosSlice'
@@ -10,7 +10,7 @@ import CreatedIcon from '../../images/icons/newest.svg?react'
 import DatePicker from '../../UI/DatePicker'
 import InfoLine from './InfoLine'
 
-function TodoDetails({ todo }) {
+const TodoDetails = memo(function TodoDetails({ todo }) {
 	const [isOpen, setIsOpen] = useState(false)
 	const dispatch = useDispatch()
 
@@ -83,6 +83,6 @@ function TodoDetails({ todo }) {
 			)}
 		</>
 	)
-}
+})
 
 export default TodoDetails

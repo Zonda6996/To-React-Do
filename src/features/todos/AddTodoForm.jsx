@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { addTodo, searchTodos } from './todosSlice'
 import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -14,8 +14,6 @@ function AddTodoForm() {
 	const [search, setSearch] = useState(false)
 	const [searchQuery, setSearchQuery] = useState('')
 
-	const todos = useSelector(state => state.todosList.todos)
-
 	function handleAddTodo(e) {
 		e.preventDefault()
 
@@ -29,6 +27,8 @@ function AddTodoForm() {
 	function inputSwitch(e) {
 		e.preventDefault()
 		setSearch(prev => !prev)
+		setSearchQuery('')
+		setTodoName('')
 	}
 
 	function handleSearch(e) {

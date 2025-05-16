@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { useEffect, useRef, useState } from 'react'
+import { memo, useEffect, useRef, useState, useCallback } from 'react'
 import { setFilter, setSort } from './todosSlice'
 import { SORT_OPTIONS, FILTER_OPTIONS } from '../../constants/filters'
 import FilterIcon from '../../images/icons/filter.svg?react'
@@ -12,15 +12,21 @@ function TodoFiltration() {
 	const [filterOpen, setFilterOpen] = useState(false)
 	const wrapperRef = useRef(null)
 
-	function handleSort(type) {
-		dispatch(setSort(type))
-		setSortOpen(false)
-	}
+	const handleSort = useCallback(
+		type => {
+			dispatch(setSort(type))
+			setSortOpen(false)
+		},
+		[dispatch]
+	)
 
-	function handleFilter(type) {
-		dispatch(setFilter(type))
-		setFilterOpen(false)
-	}
+	const handleFilter = useCallback(
+		type => {
+			dispatch(setFilter(type))
+			setFilterOpen(false)
+		},
+		[dispatch]
+	)
 
 	function toggleSortMenu() {
 		setFilterOpen(false)
@@ -87,4 +93,4 @@ function TodoFiltration() {
 	)
 }
 
-export default TodoFiltration
+export default memo(TodoFiltration)
