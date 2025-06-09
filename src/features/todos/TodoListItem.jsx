@@ -37,7 +37,7 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 	}
 
 	const todoClass = clsx(
-		'relative px-5 py-5 text-lg group font-semibold transition-colors rounded-md shadow-md ',
+		'relative px-5 py-3 sm:py-5 text-lg group font-semibold transition-colors rounded-md shadow-md ',
 		{
 			'bg-gray-100':
 				(!todo.completed && hovered.id !== todo.id) ||
@@ -58,59 +58,56 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 
 	return (
 		<li className={todoClass}>
-			<div className='flex items-center justify-between w-full'>
-				<div className='flex flex-col'>
-					<div className='flex items-center min-w-0 pr-3 space-x-3'>
-						<button
-							onClick={() => dispatch(completeTodo(todo.id))}
-							onMouseEnter={() => setHovered({ type: 'checkbox', id: todo.id })}
-							onMouseLeave={() => setHovered({ type: null, id: null })}
-							className='cursor-pointer'
-						>
-							<img
-								src={getCheckboxSrc()}
-								alt='Checkbox'
-								className='w-6 transition-colors rounded-sm hover:bg-green-600/30'
-							/>
-						</button>
-						{editingId === todo.id ? (
-							<input
-								className='w-[635px] focus:outline-0 active:outline-0'
-								type='text'
-								ref={inputRef}
-								value={newName}
-								onChange={handleChange}
-								onBlur={() => handleSave(todo.id)}
-								onKeyDown={e => handleKeyDown(e, todo.id)}
-							/>
-						) : (
-							<p
-								className={
-									todo.completed
-										? 'line-through flex-1 truncate'
-										: 'flex-1 truncate max-w-[635px]'
-								}
-								onClick={() => handleEditClick(todo)}
-							>
-								{todo.name}
-							</p>
-						)}
-					</div>
-				</div>
-				<div className='flex flex-col items-center space-x-4'>
+			<div className='flex items-center justify-between w-full gap-2 py-2'>
+				<div className='flex items-center flex-1 min-w-0 gap-3 text-base sm:text-lg'>
 					<button
-						className='cursor-pointer'
-						onClick={() => dispatch(deleteTodo(todo.id))}
-						onMouseEnter={() => setHovered({ type: 'trashIcon', id: todo.id })}
+						onClick={() => dispatch(completeTodo(todo.id))}
+						onMouseEnter={() => setHovered({ type: 'checkbox', id: todo.id })}
 						onMouseLeave={() => setHovered({ type: null, id: null })}
+						className='cursor-pointer shrink-0'
 					>
-						<TrashIcon
-							className='w-6 h-6 transition-colors hover:text-red-600'
-							style={{ fill: 'currentColor' }}
+						<img
+							src={getCheckboxSrc()}
+							alt='Checkbox'
+							className='w-6 transition-colors rounded-sm hover:bg-green-600/30'
 						/>
 					</button>
+
+					{editingId === todo.id ? (
+						<input
+							className='w-full bg-transparent focus:outline-0 active:outline-0'
+							type='text'
+							ref={inputRef}
+							value={newName}
+							onChange={handleChange}
+							onBlur={() => handleSave(todo.id)}
+							onKeyDown={e => handleKeyDown(e, todo.id)}
+						/>
+					) : (
+						<p
+							className={`truncate min-w-0 flex-1 cursor-pointer ${
+								todo.completed ? 'line-through text-light-gray' : ''
+							}`}
+							onClick={() => handleEditClick(todo)}
+						>
+							{todo.name}
+						</p>
+					)}
 				</div>
+
+				<button
+					className='cursor-pointer shrink-0'
+					onClick={() => dispatch(deleteTodo(todo.id))}
+					onMouseEnter={() => setHovered({ type: 'trashIcon', id: todo.id })}
+					onMouseLeave={() => setHovered({ type: null, id: null })}
+				>
+					<TrashIcon
+						className='w-6 h-6 transition-colors hover:text-red-600'
+						style={{ fill: 'currentColor' }}
+					/>
+				</button>
 			</div>
+
 			<div className='flex gap-2 items-baseline-last'>
 				<DueInfo
 					dueDate={todo.dueDate}

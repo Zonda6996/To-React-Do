@@ -42,7 +42,7 @@ function AddTodoForm() {
 	}, [searchQuery])
 
 	return (
-		<div className='flex flex-col items-center justify-center'>
+		<div className='flex flex-col items-center justify-center px-3 text-xs sm:text-base'>
 			<form className='relative flex flex-row items-center justify-center w-full max-w-[500px]'>
 				<AnimatePresence>
 					{search ? (
