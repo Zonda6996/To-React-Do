@@ -43,7 +43,7 @@ function AddTodoForm() {
 
 	return (
 		<div className='flex flex-col items-center justify-center'>
-			<form className='relative flex flex-row items-center justify-center w-full'>
+			<form className='relative flex flex-row items-center justify-center w-full max-w-[500px]'>
 				<AnimatePresence>
 					{search ? (
 						// Search
@@ -69,7 +69,7 @@ function AddTodoForm() {
 				</AnimatePresence>
 
 				<button
-					className='absolute cursor-pointer right-48'
+					className='absolute cursor-pointer right-25'
 					onClick={inputSwitch}
 				>
 					<AnimatePresence mode='wait'>
