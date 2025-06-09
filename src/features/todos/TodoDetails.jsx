@@ -31,7 +31,7 @@ const TodoDetails = memo(function TodoDetails({ todo }) {
 	})
 
 	const infoLineClass = clsx('', {
-		'flex justify-between': !todo.completed,
+		'flex justify-between flex-col gap-3 sm:flex-row sm:gap-0': !todo.completed,
 	})
 
 	return (
@@ -65,9 +65,13 @@ const TodoDetails = memo(function TodoDetails({ todo }) {
 								<div className={datePickerContainerClass}>
 									<DatePicker todo={todo} />
 									{todo.dueDate ? (
-										<p className='text-sm font-light'>Change due date</p>
+										<p className='text-xs font-light sm:text-sm'>
+											Change due date
+										</p>
 									) : (
-										<p className='text-sm font-light'>Add due date</p>
+										<p className='text-xs font-light sm:text-sm'>
+											Add due date
+										</p>
 									)}
 								</div>
 							)}

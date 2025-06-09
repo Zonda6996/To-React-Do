@@ -31,7 +31,7 @@ const DatePicker = memo(function DatePicker({ todo }) {
 		<>
 			<div className='flex gap-8 pb-2 pr-4'>
 				<div className='relative'>
-					<div className='absolute top-0 left-0 w-5 h-5 group/input'>
+					<div className='absolute left-0 w-4.5 h-4.5 sm:h-5 sm:w-5 group/input'>
 						<CalendarIcon className='absolute top-0 left-0 w-full h-full transition-colors group-hover/input:text-gray-500' />
 						<input
 							type='date'
@@ -42,7 +42,7 @@ const DatePicker = memo(function DatePicker({ todo }) {
 				</div>
 
 				<div className='relative mb-3'>
-					<div className='absolute top-0 left-0 w-5 h-5 group/input'>
+					<div className='absolute top-0 left-0 w-4.5 h-4.5 sm:h-5 sm:w-5 group/input'>
 						<TimeIcon className='absolute top-0 left-0 w-full h-full transition-colors rounded-sm group-hover/input:text-gray-500' />
 						<input
 							type='time'
