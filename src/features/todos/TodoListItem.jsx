@@ -82,7 +82,7 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 						<img
 							src={getCheckboxSrc()}
 							alt='Checkbox'
-							className='w-6 transition-colors rounded-sm hover:bg-green-600/30'
+							className='w-6 transition-colors rounded-sm sm:hover:bg-green-600/30'
 						/>
 					</button>
 
