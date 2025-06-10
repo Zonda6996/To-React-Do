@@ -8,6 +8,7 @@ import checkboxEmpty from '../../images/icons/checkboxEmpty.svg'
 import TrashIcon from '../../images/icons/trash.svg?react'
 import DueInfo from './DueInfo'
 import TodoDetails from './TodoDetails'
+import { isTouchDevice } from '../../helpers/isTouchDevice'
 
 const TodoListItem = memo(function TodoListItem({ todo }) {
 	const dispatch = useDispatch()
@@ -36,6 +37,18 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 		dispatch(setPriority({ id: todo.id, priority: e.target.value }))
 	}
 
+	function onIconMouseEnter(type, id) {
+		if (!isTouchDevice()) {
+			setHovered({ type: type, id: id })
+		}
+	}
+
+	function onIconMouseLeave() {
+		if (!isTouchDevice()) {
+			setHovered({ type: null, id: null })
+		}
+	}
+
 	const todoClass = clsx(
 		'relative px-5 py-3 sm:py-5 text-lg group font-semibold transition-colors rounded-md shadow-md ',
 		{
@@ -48,7 +61,7 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 	)
 
 	const priorityClass = clsx(
-		'p-0.5 text-xs font-medium focus:outline-0 rounded-md text-gray-50 mt-2',
+		'p-0.5 text-xs font-medium focus:outline-0 rounded-md text-gray-50 mt-2 max-w-13',
 		{
 			'bg-priority-green': todo.priority === 'low',
 			'bg-priority-orange': todo.priority === 'medium',
@@ -62,8 +75,8 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 				<div className='flex items-center flex-1 min-w-0 gap-3 text-base sm:text-lg'>
 					<button
 						onClick={() => dispatch(completeTodo(todo.id))}
-						onMouseEnter={() => setHovered({ type: 'checkbox', id: todo.id })}
-						onMouseLeave={() => setHovered({ type: null, id: null })}
+						onMouseEnter={() => onIconMouseEnter('checkbox', todo.id)}
+						onMouseLeave={onIconMouseLeave}
 						className='cursor-pointer shrink-0'
 					>
 						<img
@@ -98,17 +111,17 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 				<button
 					className='cursor-pointer shrink-0'
 					onClick={() => dispatch(deleteTodo(todo.id))}
-					onMouseEnter={() => setHovered({ type: 'trashIcon', id: todo.id })}
-					onMouseLeave={() => setHovered({ type: null, id: null })}
+					onMouseEnter={() => onIconMouseEnter('trashIcon', todo.id)}
+					onMouseLeave={onIconMouseLeave}
 				>
 					<TrashIcon
-						className='w-6 h-6 transition-colors hover:text-red-600'
+						className='w-5 h-5 transition-colors sm:w-6 sm:h-6 hover:text-red-600'
 						style={{ fill: 'currentColor' }}
 					/>
 				</button>
 			</div>
 
-			<div className='flex gap-2 items-baseline-last'>
+			<div className='flex flex-col gap-2 sm:flex-row sm:items-baseline-last'>
 				<DueInfo
 					dueDate={todo.dueDate}
 					dueTime={todo.dueTime}
@@ -120,7 +133,7 @@ const TodoListItem = memo(function TodoListItem({ todo }) {
 						value={todo.priority}
 						onChange={handleChangePriority}
 					>
-						<option className='text-black bg-gray-200' disabled>
+						<option className='text-black bg-gray-200 ' disabled>
 							Priority
 						</option>
 						<option className='text-black' value='low'>

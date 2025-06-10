@@ -20,7 +20,7 @@ const TodoDetails = memo(function TodoDetails({ todo }) {
 	}
 
 	const arrowButton = clsx(
-		'transition-all duration-200 opacity-0 cursor-pointer group-hover:opacity-100',
+		'transition-all duration-200 opacity-100 lg:opacity-0 cursor-pointer lg:group-hover:opacity-100',
 		{
 			'rotate-180': isOpen,
 		}
@@ -36,7 +36,7 @@ const TodoDetails = memo(function TodoDetails({ todo }) {
 
 	return (
 		<>
-			<div className='absolute bottom-0 left-1/2'>
+			<div className='absolute right-5 -bottom-2 sm:left-1/2 lg:bottom-0'>
 				<button className={arrowButton} onClick={() => setIsOpen(!isOpen)}>
 					<ArrowDownIcon className='text-gray-400' />
 				</button>
